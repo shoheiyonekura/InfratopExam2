@@ -1,4 +1,16 @@
+<div>
+  <%= flash[:notice] %>
+</div>
+
 <h1>Books</h1>
+<!--テーブルに入れる前に動作確認-->
+  <!--.eachで一覧を表示-->
+  <% @books.each do |book| %>
+  <span>
+    <%= book.title %>
+  </span>
+  <% end %>
+  
 <table>
   <thead>
     <tr>
@@ -9,5 +21,17 @@
   </thead>
   <tbody>
   </tbody>
+  
 </table>
 <h2>New book</h2>
+<%= form_with model: @book, url: '/books',method: :post do |f| %>
+  <div class="field">
+  <%= f.label :title, "Title" %>
+  <%= f.text_field :title %>
+	</div>
+	<div class="field">
+	<%= f.label :body, "Body" %>
+  <%= f.text_area :body %>
+  </div>
+  <%= f.submit 'Create Book' %>
+<% end %>
